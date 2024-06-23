@@ -1,0 +1,30 @@
+from collections import defaultdict
+
+class Graph:
+    def _init_(self):
+        self.graph = defaultdict(list)
+
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+
+    def dfs_util(self, node, visited):
+        visited.add(node)
+        print(node, end=" ")
+
+        for neighbor in self.graph[node]:
+            if neighbor not in visited:
+                self.dfs_util(neighbor, visited)
+
+    def dfs(self, start):
+        visited = set()
+        self.dfs_util(start, visited)
+g = Graph()
+g.add_edge('A', 'B')
+g.add_edge('A', 'C')
+g.add_edge('B', 'D')
+g.add_edge('B', 'E')
+g.add_edge('C', 'F')
+g.add_edge('C', 'G')
+
+print("DFS Traversal starting from vertex 'A':")
+g.dfs('A')
